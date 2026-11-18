@@ -1,0 +1,11 @@
+{
+  "invalid": [
+    {
+      "jira": "QAP-11",
+      "case": "Identifiants incorrects",
+      "email": "inconnu.qa@test.com",
+      "password": "Faux1234!",
+      "error": "Your email or password is incorrect!"
+    }
+  ]
+}

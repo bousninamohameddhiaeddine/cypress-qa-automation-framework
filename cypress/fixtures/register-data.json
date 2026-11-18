@@ -1,0 +1,31 @@
+{
+  "newUser": {
+    "jira": "QAP-9",
+    "case": "Inscription d'un nouvel utilisateur puis suppression",
+    "name": "QA Test",
+    "title": "Mr",
+    "password": "Test1234!",
+    "day": "15",
+    "month": "May",
+    "year": "1995",
+    "firstName": "Qa",
+    "lastName": "Tester",
+    "company": "QA Portfolio",
+    "address": "123 rue Principale",
+    "address2": "App 4",
+    "country": "Canada",
+    "state": "Quebec",
+    "city": "Montreal",
+    "zipcode": "H2X 1Y4",
+    "mobile": "5145551234"
+  },
+  "invalid": [
+    {
+      "jira": "QAP-13",
+      "case": "Courriel déjà utilisé",
+      "name": "QA Doublon",
+      "email": "env:userEmail",
+      "error": "Email Address already exist!"
+    }
+  ]
+}
