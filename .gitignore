@@ -153,3 +153,5 @@ cypress/videos/
 cypress/screenshots/
 cypress.env.json
 .env
+# Notes personnelles (non publiées)
+docs/discussion-claude-*.md
