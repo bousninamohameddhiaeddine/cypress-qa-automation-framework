@@ -1,25 +1,22 @@
-// ***********************************************
-// This example commands.js shows you how to
-// create various custom commands and overwrite
-// existing commands.
-//
-// For more comprehensive examples of custom
-// commands please read more here:
-// https://on.cypress.io/custom-commands
-// ***********************************************
-//
-//
-// -- This is a parent command --
-// Cypress.Commands.add('login', (email, password) => { ... })
-//
-//
-// -- This is a child command --
-// Cypress.Commands.add('drag', { prevSubject: 'element'}, (subject, options) => { ... })
-//
-//
-// -- This is a dual command --
-// Cypress.Commands.add('dismiss', { prevSubject: 'optional'}, (subject, options) => { ... })
-//
-//
-// -- This will overwrite an existing command --
-// Cypress.Commands.overwrite('visit', (originalFn, url, options) => { ... })
+// Commandes personnalisées du projet
+// (les captures d'écran sont gérées automatiquement dans e2e.js)
+import { screenshotName } from "./screenshot";
+
+// cy.captureValidation() : prend la capture "PASSED" à un moment précis du test
+// (au lieu de la fin). La capture automatique de fin de test est alors désactivée
+// pour ce test, il n'y a donc qu'une seule capture.
+Cypress.Commands.add("captureValidation", () => {
+  Cypress.validationCaptured = true;
+  cy.screenshot(screenshotName(Cypress.currentTest.title, "PASSED"), { capture: "viewport" });
+});
+
+// Ouvre la page "Signup / Login" depuis l'accueil.
+// À appeler au début de chaque test (pas dans un beforeEach) : si le site ne charge pas,
+// seul ce test échoue et les suivants s'exécutent quand même.
+Cypress.Commands.add("openLoginPage", () => {
+  cy.visit("/");
+  cy.get('img[alt="Website for automation practice"]').should("be.visible");
+  cy.contains("a", "Signup / Login").click();
+  cy.contains("h2", "Login to your account").should("be.visible");
+  cy.contains("h2", "New User Signup!").should("be.visible");
+});

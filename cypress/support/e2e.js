@@ -15,4 +15,27 @@
 
 // Import commands.js using ES2015 syntax:
 import './commands'
+import { screenshotName } from "./screenshot";
 Cypress.on("uncaught:exception", () => false);
+
+// Une capture par test, avec date et heure dans le nom (historique conservé) :
+// - SUCCÈS : la page à la fin du test (viewport),
+//            SAUF si le test a déjà pris sa capture avec cy.captureValidation()
+// - ÉCHEC  : tout l'écran Cypress avec le message d'erreur (runner)
+//     · cypress run  → capture automatique de Cypress (screenshotOnRunFailure)
+//     · cypress open → screenshotOnRunFailure ne fonctionne pas, on la prend ici
+beforeEach(() => {
+  Cypress.validationCaptured = false;
+});
+
+afterEach(function () {
+  const { title, state } = this.currentTest;
+  const failed = state === "failed";
+  if (failed && !Cypress.config("isInteractive")) return; // déjà prise par Cypress
+  if (!failed && state !== "passed") return;
+  if (!failed && Cypress.validationCaptured) return; // déjà prise dans le test
+
+  cy.screenshot(screenshotName(title, failed ? "FAILED" : "PASSED"), {
+    capture: failed ? "runner" : "viewport",
+  });
+});
