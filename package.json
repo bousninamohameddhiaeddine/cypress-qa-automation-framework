@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "cy:open": "cypress open",
+    "test": "cypress run --browser chrome",
+    "test:ui": "cypress run --browser chrome --spec \"cypress/e2e/ui/**/*.cy.js\""
   },
   "repository": {
     "type": "git",
