@@ -1,14 +1,10 @@
 // QAP-58 : automatisation de TC02, TC03 et TC04 (connexion / déconnexion)
 import data from "../../fixtures/login-data.json";
+import LoginPage from "../../pages/LoginPage";
+import Header from "../../pages/Header";
 
 // Cypress 16 : Cypress.env() est supprimé, on lit les secrets avec cy.env()
 let user;
-
-const login = (email, password) => {
-  cy.get('[data-qa="login-email"]').type(email);
-  cy.get('[data-qa="login-password"]').type(password, { log: false });
-  cy.get('[data-qa="login-button"]').click();
-};
 
 describe("Connexion", () => {
   // Le hook ne fait que lire les identifiants : il ne peut pas échouer à cause du site
@@ -20,28 +16,27 @@ describe("Connexion", () => {
 
   // TC02 — le compte partagé n'est PAS supprimé (la suppression est testée dans TC01)
   it("[QAP-10] Connexion avec identifiants valides", () => {
-    cy.openLoginPage();
-    login(user.email, user.password);
-    cy.contains("a", `Logged in as ${user.name}`).should("be.visible");
+    LoginPage.open();
+    LoginPage.login(user.email, user.password);
+    Header.shouldBeLoggedInAs(user.name);
   });
 
   // TC03 — piloté par les données (login-data.json)
   data.invalid.forEach((row) => {
     it(`[${row.jira}] Refuse la connexion - ${row.case}`, () => {
-      cy.openLoginPage();
-      login(row.email, row.password);
-      cy.contains(row.error).should("be.visible");
+      LoginPage.open();
+      LoginPage.login(row.email, row.password);
+      LoginPage.shouldShowError(row.error);
       cy.url().should("include", "/login");
     });
   });
 
   // TC04
   it("[QAP-12] Déconnexion", () => {
-    cy.openLoginPage();
-    login(user.email, user.password);
-    cy.contains("a", `Logged in as ${user.name}`).should("be.visible");
-    cy.contains("a", "Logout").click();
-    cy.url().should("include", "/login");
-    cy.contains("h2", "Login to your account").should("be.visible");
+    LoginPage.open();
+    LoginPage.login(user.email, user.password);
+    Header.shouldBeLoggedInAs(user.name);
+    Header.logout();
+    LoginPage.shouldBeVisible();
   });
 });
