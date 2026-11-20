@@ -18,6 +18,10 @@ class Header {
     cy.get(L.loggedInAs).should("be.visible").and("contain.text", `Logged in as ${name}`);
   }
 
+  shouldBeLoggedOut() {
+    cy.get(L.loggedInAs).should("not.exist");
+  }
+
   logout() {
     cy.get(L.logoutLink).click();
   }

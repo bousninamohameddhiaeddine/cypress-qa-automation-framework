@@ -1,4 +1,9 @@
-// QAP-58 : automatisation de TC02, TC03 et TC04 (connexion / déconnexion)
+// =====================================================================
+// Module : Connexion
+// Story Jira : QAP-58 — Automatiser TC02, TC03, TC04 (connexion)
+// Epic Jira  : QAP-2  — S1 Installation, premiers tests et projet Jira
+// Données    : cypress/fixtures/login-data.json
+// =====================================================================
 import data from "../../fixtures/login-data.json";
 import LoginPage from "../../pages/LoginPage";
 import Header from "../../pages/Header";
@@ -14,29 +19,46 @@ describe("Connexion", () => {
     });
   });
 
-  // TC02 — le compte partagé n'est PAS supprimé (la suppression est testée dans TC01)
+  // ---------------------------------------------------------------
+  // QAP-10 · TC02 — Connexion avec identifiants valides
+  // Type : Positif · Priorité : Haute
+  // Note : le compte partagé n'est PAS supprimé (la suppression est testée dans TC01 / QAP-9)
+  // ---------------------------------------------------------------
   it("[QAP-10] Connexion avec identifiants valides", () => {
     LoginPage.open();
     LoginPage.login(user.email, user.password);
     Header.shouldBeLoggedInAs(user.name);
   });
 
-  // TC03 — piloté par les données (login-data.json)
+  // ---------------------------------------------------------------
+  // QAP-11 · TC03 — Connexion avec identifiants incorrects
+  // Type : Négatif · Priorité : Haute
+  // Piloté par les données : un test par ligne de login-data.json → "invalid".
+  // Négatifs à ajouter dans le JSON (séance 3) :
+  //   QAP-35 · TC02-N1 — Bon courriel, mauvais mot de passe
+  //   QAP-36 · TC02-N2 — Connexion avec courriel vide
+  //   QAP-37 · TC02-N3 — Connexion avec mot de passe vide
+  //   QAP-38 · TC02-N4 — Connexion avec courriel mal formé
+  // ---------------------------------------------------------------
   data.invalid.forEach((row) => {
     it(`[${row.jira}] Refuse la connexion - ${row.case}`, () => {
       LoginPage.open();
       LoginPage.login(row.email, row.password);
       LoginPage.shouldShowError(row.error);
-      cy.url().should("include", "/login");
+      LoginPage.shouldBeLoggedOut();
     });
   });
 
-  // TC04
+  // ---------------------------------------------------------------
+  // QAP-12 · TC04 — Déconnexion
+  // Type : Positif · Priorité : Moyenne
+  // ---------------------------------------------------------------
   it("[QAP-12] Déconnexion", () => {
     LoginPage.open();
     LoginPage.login(user.email, user.password);
     Header.shouldBeLoggedInAs(user.name);
     Header.logout();
+    LoginPage.shouldBeLoggedOut();
     LoginPage.shouldBeVisible();
   });
 });

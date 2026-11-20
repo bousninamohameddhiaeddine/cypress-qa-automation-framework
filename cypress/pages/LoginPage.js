@@ -20,16 +20,22 @@ class LoginPage {
     cy.get(L.signupTitle).should("be.visible");
   }
 
+  // fill() accepte les valeurs vides (cas négatifs), contrairement à type()
   login(email, password) {
-    cy.get(L.loginEmail).type(email);
-    cy.get(L.loginPassword).type(password, { log: false });
+    cy.get(L.loginEmail).fill(email);
+    cy.get(L.loginPassword).fill(password, { log: false });
     cy.get(L.loginButton).click();
   }
 
   signup(name, email) {
-    cy.get(L.signupName).type(name);
-    cy.get(L.signupEmail).type(email);
+    cy.get(L.signupName).fill(name);
+    cy.get(L.signupEmail).fill(email);
     cy.get(L.signupButton).click();
+  }
+
+  shouldBeLoggedOut() {
+    Header.shouldBeLoggedOut();
+    cy.url().should("include", "/login");
   }
 
   shouldShowError(message) {
