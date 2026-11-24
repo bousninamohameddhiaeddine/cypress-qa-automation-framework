@@ -6,6 +6,10 @@ class AccountStatusPage {
     cy.get(L.accountCreated).should("be.visible");
   }
 
+  shouldNotShowAccountCreated() {
+    cy.get(L.accountCreated).should("not.exist");
+  }
+
   shouldShowAccountDeleted() {
     cy.get(L.accountDeleted).should("be.visible");
   }

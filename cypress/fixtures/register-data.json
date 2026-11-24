@@ -26,6 +26,37 @@
       "name": "QA Doublon",
       "email": "env:userEmail",
       "error": "Email Address already exist!"
+    },
+    {
+      "jira": "QAP-39",
+      "case": "Nom vide",
+      "name": "",
+      "email": "unique",
+      "validation": "signupName"
+    },
+    {
+      "jira": "QAP-40",
+      "case": "Courriel sans @",
+      "name": "QA Test",
+      "email": "courriel-invalide",
+      "validation": "signupEmail"
+    },
+    {
+      "jira": "QAP-40",
+      "case": "Courriel avec espace",
+      "name": "QA Test",
+      "email": "123 aze@test.com",
+      "paste": true,
+      "validation": "signupEmail"
     }
+  ],
+  "invalidAccountForm": [
+    { "jira": "QAP-41", "case": "Mot de passe vide", "skip": "password" },
+    { "jira": "QAP-42", "case": "Prénom vide", "skip": "firstName" },
+    { "jira": "QAP-42", "case": "Nom de famille vide", "skip": "lastName" },
+    { "jira": "QAP-42", "case": "Adresse vide", "skip": "address" },
+    { "jira": "QAP-42", "case": "Ville vide", "skip": "city" },
+    { "jira": "QAP-42", "case": "Code postal vide", "skip": "zipcode" },
+    { "jira": "QAP-42", "case": "Mobile vide", "skip": "mobile" }
   ]
 }

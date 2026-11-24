@@ -6,6 +6,41 @@
       "email": "inconnu.qa@test.com",
       "password": "Faux1234!",
       "error": "Your email or password is incorrect!"
+    },
+    {
+      "jira": "QAP-35",
+      "case": "Bon courriel, mauvais mot de passe",
+      "email": "env:userEmail",
+      "password": "MauvaisMdp123!",
+      "error": "Your email or password is incorrect!"
+    },
+    {
+      "jira": "QAP-36",
+      "case": "Courriel vide",
+      "email": "",
+      "password": "Test1234!",
+      "validation": "loginEmail"
+    },
+    {
+      "jira": "QAP-37",
+      "case": "Mot de passe vide",
+      "email": "env:userEmail",
+      "password": "",
+      "validation": "loginPassword"
+    },
+    {
+      "jira": "QAP-38",
+      "case": "Courriel sans @",
+      "email": "dhia.test.com",
+      "password": "Test1234!",
+      "validation": "loginEmail"
+    },
+    {
+      "jira": "QAP-38",
+      "case": "Courriel sans domaine",
+      "email": "dhia@",
+      "password": "Test1234!",
+      "validation": "loginEmail"
     }
   ]
 }

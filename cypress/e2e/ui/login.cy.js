@@ -31,20 +31,28 @@ describe("Connexion", () => {
   });
 
   // ---------------------------------------------------------------
-  // QAP-11 · TC03 — Connexion avec identifiants incorrects
-  // Type : Négatif · Priorité : Haute
-  // Piloté par les données : un test par ligne de login-data.json → "invalid".
-  // Négatifs à ajouter dans le JSON (séance 3) :
-  //   QAP-35 · TC02-N1 — Bon courriel, mauvais mot de passe
-  //   QAP-36 · TC02-N2 — Connexion avec courriel vide
-  //   QAP-37 · TC02-N3 — Connexion avec mot de passe vide
-  //   QAP-38 · TC02-N4 — Connexion avec courriel mal formé
+  // Cas négatifs de connexion — pilotés par login-data.json → "invalid"
+  // (un test par ligne du JSON)
+  //   QAP-11 · TC03    — Connexion avec identifiants incorrects   · Négatif · Haute
+  //   QAP-35 · TC02-N1 — Bon courriel, mauvais mot de passe       · Négatif · Haute
+  //   QAP-36 · TC02-N2 — Connexion avec courriel vide             · Négatif · Moyenne
+  //   QAP-37 · TC02-N3 — Connexion avec mot de passe vide         · Négatif · Moyenne
+  //   QAP-38 · TC02-N4 — Connexion avec courriel mal formé (x2)   · Négatif · Moyenne
+  //
+  // Deux sortes d'erreurs dans le JSON :
+  //   "error"      → message du serveur affiché dans la page
+  //   "validation" → champ bloqué par le navigateur (HTML5), nom du localisateur
   // ---------------------------------------------------------------
   data.invalid.forEach((row) => {
     it(`[${row.jira}] Refuse la connexion - ${row.case}`, () => {
+      // "env:userEmail" = utiliser le courriel du compte de test (jamais écrit dans le JSON)
+      const email = row.email === "env:userEmail" ? user.email : row.email;
+
       LoginPage.open();
-      LoginPage.login(row.email, row.password);
-      LoginPage.shouldShowError(row.error);
+      LoginPage.login(email, row.password);
+
+      if (row.error) LoginPage.shouldShowError(row.error);
+      if (row.validation) LoginPage.shouldHaveInvalidField(row.validation);
       LoginPage.shouldBeLoggedOut();
     });
   });

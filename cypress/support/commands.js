@@ -23,9 +23,20 @@ Cypress.Commands.add("captureValidation", () => {
 
 // cy.get(...).fill(valeur) : vide le champ puis tape la valeur (si elle n'est pas vide).
 // Permet de tester les champs vides sans que .type("") ne plante.
+//
+// Option { paste: true } : colle la valeur d'un seul coup au lieu de la taper.
+// Utile pour un courriel avec espace : en tapant touche par touche, l'espace se retrouve
+// en fin de texte et le navigateur le supprime (règle HTML des <input type="email">).
 Cypress.Commands.add("fill", { prevSubject: "element" }, (subject, value, options = {}) => {
+  const { paste, ...typeOptions } = options;
   cy.wrap(subject, { log: false }).clear();
-  if (value) cy.wrap(subject, { log: false }).type(value, options);
+  if (!value) return cy.wrap(subject, { log: false });
+
+  if (paste) {
+    cy.wrap(subject, { log: false }).invoke("val", value).trigger("input");
+  } else {
+    cy.wrap(subject, { log: false }).type(value, typeOptions);
+  }
   return cy.wrap(subject, { log: false });
 });
 
