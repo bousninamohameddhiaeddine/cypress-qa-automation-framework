@@ -43,6 +43,11 @@ class SignupPage {
     });
   }
 
+  // Validation HTML5 : "field" = nom du champ (ex. "firstName"), le même que dans le JSON
+  shouldHaveInvalidField(field) {
+    cy.get(L[field]).shouldBeInvalid();
+  }
+
   createAccount() {
     cy.get(L.createAccount).click();
   }

@@ -27,15 +27,21 @@ class LoginPage {
     cy.get(L.loginButton).click();
   }
 
-  signup(name, email) {
+  // options.paste = coller le courriel au lieu de le taper (voir fill() dans commands.js)
+  signup(name, email, options = {}) {
     cy.get(L.signupName).fill(name);
-    cy.get(L.signupEmail).fill(email);
+    cy.get(L.signupEmail).fill(email, { paste: options.paste });
     cy.get(L.signupButton).click();
   }
 
   shouldBeLoggedOut() {
     Header.shouldBeLoggedOut();
     cy.url().should("include", "/login");
+  }
+
+  // Validation HTML5 : "field" = nom du localisateur dans locators.js (ex. "loginEmail")
+  shouldHaveInvalidField(field) {
+    cy.get(L[field]).shouldBeInvalid();
   }
 
   shouldShowError(message) {
