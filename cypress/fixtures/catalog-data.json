@@ -1,0 +1,18 @@
+{
+  "categories": {
+    "jira": "QAP-26",
+    "case": "Affichage des produits par catégorie",
+    "rows": [
+      { "category": "Women", "sub": "Dress", "title": "Women - Dress Products" },
+      { "category": "Men", "sub": "Tshirts", "title": "Men - Tshirts Products" }
+    ]
+  },
+  "brands": {
+    "jira": "QAP-27",
+    "case": "Affichage des produits par marque",
+    "rows": [
+      { "brand": "Polo", "title": "Brand - Polo Products" },
+      { "brand": "Madame", "title": "Brand - Madame Products" }
+    ]
+  }
+}

@@ -1,0 +1,22 @@
+{
+  "valid": [
+    {
+      "jira": "QAP-18",
+      "case": "Abonnement depuis la page d'accueil",
+      "page": "home",
+      "email": "qa.abonnement@test.com",
+      "success": "You have been successfully subscribed!"
+    },
+    {
+      "jira": "QAP-19",
+      "case": "Abonnement depuis la page Panier",
+      "page": "cart",
+      "email": "qa.abonnement@test.com",
+      "success": "You have been successfully subscribed!"
+    }
+  ],
+  "invalid": [
+    { "jira": "QAP-47", "case": "Courriel vide", "email": "", "validation": "subscribeEmail" },
+    { "jira": "QAP-47", "case": "Courriel sans @", "email": "abonnement.invalide", "validation": "subscribeEmail" }
+  ]
+}

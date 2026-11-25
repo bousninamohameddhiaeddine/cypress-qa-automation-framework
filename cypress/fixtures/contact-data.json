@@ -1,0 +1,35 @@
+{
+  "valid": [
+    {
+      "jira": "QAP-14",
+      "case": "Envoi du formulaire avec fichier joint",
+      "name": "QA Test",
+      "email": "qa.contact@test.com",
+      "subject": "Test automatisé Cypress",
+      "message": "Message envoyé par un test automatisé.",
+      "file": "cypress/fixtures/files/test-upload.txt",
+      "confirm": "Press OK to proceed!",
+      "success": "Success! Your details have been submitted successfully."
+    }
+  ],
+  "invalid": [
+    {
+      "jira": "QAP-43",
+      "case": "Courriel au format invalide",
+      "name": "QA Test",
+      "email": "contact.invalide",
+      "subject": "Test",
+      "message": "Message de test",
+      "validation": "email"
+    },
+    {
+      "jira": "QAP-44",
+      "case": "Courriel vide",
+      "name": "QA Test",
+      "email": "",
+      "subject": "Test",
+      "message": "Message de test",
+      "validation": "email"
+    }
+  ]
+}

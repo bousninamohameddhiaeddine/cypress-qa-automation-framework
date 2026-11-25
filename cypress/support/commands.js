@@ -49,6 +49,14 @@ Cypress.Commands.add("shouldBeInvalid", { prevSubject: "element" }, (subject) =>
   });
 });
 
+// cy.shouldNotBeDisplayed(selecteur) : l'élément est absent de la page OU caché.
+// (should("not.be.visible") échoue si l'élément n'existe pas du tout)
+Cypress.Commands.add("shouldNotBeDisplayed", (selector) => {
+  cy.get("body").should(($body) => {
+    expect($body.find(selector).filter(":visible").length, `${selector} affiché`).to.eq(0);
+  });
+});
+
 // ---------------------------------------------------------------------
 // Connexion mise en cache (séance 2)
 // ---------------------------------------------------------------------
