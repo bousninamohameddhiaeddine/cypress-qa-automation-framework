@@ -5,7 +5,7 @@
 // Vérifie que Cypress, le baseUrl et le blocage des pubs fonctionnent.
 // =====================================================================
 
-describe("Vérification de la configuration", () => {
+describe("Vérification de la configuration", { tags: "@regression" }, () => {
   // ---------------------------------------------------------------
   // QAP-56 — La page d'accueil se charge correctement
   // ---------------------------------------------------------------

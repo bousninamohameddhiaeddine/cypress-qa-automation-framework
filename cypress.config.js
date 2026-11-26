@@ -1,11 +1,12 @@
 const { defineConfig } = require("cypress");
 const fs = require("fs");
+const { plugin: cypressGrepPlugin } = require("@cypress/grep/plugin");
 
 module.exports = defineConfig({
   e2e: {
     baseUrl: "https://automationexercise.com",
     downloadsFolder: "cypress/downloads",
-    setupNodeEvents(on) {
+    setupNodeEvents(on, config) {
       // cy.task("deleteFile", chemin) : supprime un fichier avant un téléchargement
       // (sinon une ancienne facture pourrait faire passer le test QAP-32 à tort)
       on("task", {
@@ -14,6 +15,11 @@ module.exports = defineConfig({
           return null;
         },
       });
+
+      // @cypress/grep : avec grepFilterSpecs, seuls les fichiers qui contiennent
+      // le tag demandé sont ouverts (exécution smoke plus rapide)
+      cypressGrepPlugin(config);
+      return config;
     },
     viewportWidth: 1366,
     viewportHeight: 768,

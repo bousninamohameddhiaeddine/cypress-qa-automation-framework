@@ -39,7 +39,7 @@ const checkoutAndPay = (u) => {
   PaymentPage.shouldShowOrderPlaced(data.orderConfirmed);
 };
 
-describe("Commande", () => {
+describe("Commande", { tags: "@regression" }, () => {
   // ---------------------------------------------------------------
   // QAP-22 · TC14 — Commande : inscription pendant le paiement
   // Type : Positif · Priorité : Haute

@@ -6,7 +6,9 @@
   "scripts": {
     "cy:open": "cypress open",
     "test": "cypress run --browser chrome",
-    "test:ui": "cypress run --browser chrome --spec \"cypress/e2e/ui/**/*.cy.js\""
+    "test:ui": "cypress run --browser chrome --spec \"cypress/e2e/ui/**/*.cy.js\"",
+    "test:smoke": "cypress run --browser chrome --expose grepTags=@smoke,grepFilterSpecs=true,grepOmitFiltered=true",
+    "test:regression": "cypress run --browser chrome --expose grepTags=@regression"
   },
   "repository": {
     "type": "git",
@@ -21,6 +23,7 @@
   },
   "homepage": "https://github.com/bousninamohameddhiaeddine/cypress-qa-automation-framework#readme",
   "devDependencies": {
+    "@cypress/grep": "^7.0.0",
     "cypress": "^16.2.1"
   }
 }

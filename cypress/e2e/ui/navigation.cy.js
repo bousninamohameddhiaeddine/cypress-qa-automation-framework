@@ -7,7 +7,7 @@ import HomePage from "../../pages/HomePage";
 import Header from "../../pages/Header";
 import TestCasesPage from "../../pages/TestCasesPage";
 
-describe("Navigation", () => {
+describe("Navigation", { tags: "@regression" }, () => {
   // ---------------------------------------------------------------
   // QAP-15 · TC07 — Accès à la page « Test Cases »
   // Type : Positif · Priorité : Basse

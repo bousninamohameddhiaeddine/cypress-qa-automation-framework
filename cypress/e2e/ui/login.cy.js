@@ -11,7 +11,7 @@ import Header from "../../pages/Header";
 // Cypress 16 : Cypress.env() est supprimé, on lit les secrets avec cy.env()
 let user;
 
-describe("Connexion", () => {
+describe("Connexion", { tags: "@regression" }, () => {
   // Le hook ne fait que lire les identifiants : il ne peut pas échouer à cause du site
   beforeEach(() => {
     cy.env(["userEmail", "userPassword", "userName"], { log: false }).then((env) => {
@@ -24,7 +24,7 @@ describe("Connexion", () => {
   // Type : Positif · Priorité : Haute
   // Note : le compte partagé n'est PAS supprimé (la suppression est testée dans TC01 / QAP-9)
   // ---------------------------------------------------------------
-  it("[QAP-10] Connexion avec identifiants valides", () => {
+  it("[QAP-10] Connexion avec identifiants valides", { tags: "@smoke" }, () => {
     LoginPage.open();
     LoginPage.login(user.email, user.password);
     Header.shouldBeLoggedInAs(user.name);

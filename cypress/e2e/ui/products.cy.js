@@ -11,12 +11,12 @@ import HomePage from "../../pages/HomePage";
 import ProductsPage from "../../pages/ProductsPage";
 import ProductDetailPage from "../../pages/ProductDetailPage";
 
-describe("Produits", () => {
+describe("Produits", { tags: "@regression" }, () => {
   // ---------------------------------------------------------------
   // QAP-16 · TC08 — Liste des produits et page de détail d'un produit
   // Type : Positif · Priorité : Haute · smoke
   // ---------------------------------------------------------------
-  it("[QAP-16] Liste des produits et page de détail", () => {
+  it("[QAP-16] Liste des produits et page de détail", { tags: "@smoke" }, () => {
     ProductsPage.open();
     ProductsPage.shouldShowProducts();
     ProductsPage.openFirstProduct();
