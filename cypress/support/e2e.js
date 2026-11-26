@@ -16,6 +16,11 @@
 // Import commands.js using ES2015 syntax:
 import './commands'
 import { screenshotName } from "./screenshot";
+
+// @cypress/grep (v7, Cypress 16) : filtrer les tests par tag (@smoke, @regression)
+// ex. npx cypress run --expose grepTags=@smoke
+import { register as registerCypressGrep } from "@cypress/grep";
+registerCypressGrep();
 Cypress.on("uncaught:exception", () => false);
 
 // Une capture par test, avec date et heure dans le nom (historique conservé) :

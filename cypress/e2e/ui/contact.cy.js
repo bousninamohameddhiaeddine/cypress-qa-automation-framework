@@ -7,7 +7,7 @@
 import data from "../../fixtures/contact-data.json";
 import ContactPage from "../../pages/ContactPage";
 
-describe("Contact", () => {
+describe("Contact", { tags: "@regression" }, () => {
   // ---------------------------------------------------------------
   // QAP-14 · TC06 — Envoi du formulaire de contact avec fichier joint
   // Type : Positif · Priorité : Moyenne

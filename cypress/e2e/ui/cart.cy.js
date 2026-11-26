@@ -17,12 +17,12 @@ import ProductDetailPage from "../../pages/ProductDetailPage";
 import CartModal from "../../pages/CartModal";
 import CartPage from "../../pages/CartPage";
 
-describe("Panier", () => {
+describe("Panier", { tags: "@regression" }, () => {
   // ---------------------------------------------------------------
   // QAP-20 · TC12 — Ajout de deux produits au panier et vérification des montants
   // Type : Positif · Priorité : Haute · smoke
   // ---------------------------------------------------------------
-  it("[QAP-20] Ajout de deux produits et vérification des montants", () => {
+  it("[QAP-20] Ajout de deux produits et vérification des montants", { tags: "@smoke" }, () => {
     ProductsPage.open();
     ProductsPage.addToCart(0, "product1");
     CartModal.continueShopping();

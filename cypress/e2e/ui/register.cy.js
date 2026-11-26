@@ -13,7 +13,7 @@ import Header from "../../pages/Header";
 // Cypress 16 : Cypress.env() est supprimé, on lit les secrets avec cy.env()
 let existingEmail;
 
-describe("Inscription", () => {
+describe("Inscription", { tags: "@regression" }, () => {
   // Le hook ne fait que lire les identifiants : il ne peut pas échouer à cause du site
   beforeEach(() => {
     cy.env(["userEmail"], { log: false }).then((env) => {
@@ -26,7 +26,7 @@ describe("Inscription", () => {
   // Type : Positif · Priorité : Haute
   // Note : crée un compte unique puis le supprime (le compte partagé n'est pas touché)
   // ---------------------------------------------------------------
-  it(`[${data.newUser.jira}] ${data.newUser.case}`, () => {
+  it(`[${data.newUser.jira}] ${data.newUser.case}`, { tags: "@smoke" }, () => {
     const u = data.newUser;
     const email = `qa.test.${Date.now()}@example.com`; // courriel unique à chaque exécution
 

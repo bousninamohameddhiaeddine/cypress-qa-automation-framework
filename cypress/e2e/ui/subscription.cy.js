@@ -18,7 +18,7 @@ const openPage = (page) => {
   }
 };
 
-describe("Abonnement", () => {
+describe("Abonnement", { tags: "@regression" }, () => {
   // ---------------------------------------------------------------
   //   QAP-18 · TC10 — Abonnement à l'infolettre depuis la page d'accueil · Positif · Moyenne
   //   QAP-19 · TC11 — Abonnement à l'infolettre depuis la page Panier    · Positif · Basse

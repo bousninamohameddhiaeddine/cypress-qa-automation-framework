@@ -31,7 +31,7 @@ const goToPayment = () => {
   CheckoutPage.placeOrder(checkoutData.comment);
 };
 
-describe("Paiement - validation de la carte", () => {
+describe("Paiement - validation de la carte", { tags: "@regression" }, () => {
   before(() => {
     cy.createAccountByApi(u);
   });
