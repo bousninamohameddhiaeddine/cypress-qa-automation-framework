@@ -7,11 +7,12 @@
 // Menu en haut de toutes les pages
 export const HeaderLocators = {
   logo: 'img[alt="Website for automation practice"]',
-  signupLoginLink: 'a[href="/login"]',
-  logoutLink: 'a[href="/logout"]',
-  deleteAccountLink: 'a[href="/delete_account"]',
-  loggedInAs: 'a:contains("Logged in as")',
-  // liens du menu (limités au menu : certains liens existent aussi ailleurs dans la page)
+  // Liens du menu, limités au menu (.shop-menu) : certains liens existent aussi ailleurs
+  // dans la page (ex. "Register / Login" dans la fenêtre cachée du panier → 2 éléments trouvés)
+  signupLoginLink: '.shop-menu a[href="/login"]',
+  logoutLink: '.shop-menu a[href="/logout"]',
+  deleteAccountLink: '.shop-menu a[href="/delete_account"]',
+  loggedInAs: '.shop-menu a:contains("Logged in as")',
   productsLink: '.shop-menu a[href="/products"]',
   cartLink: '.shop-menu a[href="/view_cart"]',
   testCasesLink: '.shop-menu a[href="/test_cases"]',
@@ -30,6 +31,59 @@ export const FooterLocators = {
 export const HomeLocators = {
   heroTitle: '#slider-carousel .item.active h2:contains("Full-Fledged practice website for Automation Engineers")',
   scrollUpButton: "#scrollUp",
+  // section "Recommended items" en bas de page (carrousel : on cible l'élément visible)
+  recommendedTitle: ".recommended_items h2.title",
+  recommendedActiveCard: "#recommended-item-carousel .item.active .productinfo",
+  cardName: "p",
+  cardAddToCart: "a.add-to-cart",
+};
+
+// Fenêtre "Added!" qui s'ouvre après un ajout au panier
+export const CartModalLocators = {
+  modal: "#cartModal",
+  continueShopping: "#cartModal button.close-modal",
+  viewCart: '#cartModal a[href="/view_cart"]',
+};
+
+// Page "Shopping Cart" (/view_cart)
+export const CartLocators = {
+  rows: "#cart_info_table tbody tr",
+  rowName: ".cart_description h4 a",
+  rowPrice: ".cart_price p",
+  rowQuantity: ".cart_quantity button",
+  rowTotal: ".cart_total_price",
+  rowDelete: ".cart_quantity_delete",
+  emptyCart: '#empty_cart:contains("Cart is empty!")',
+  proceedToCheckout: ".check_out",
+  // fenêtre "Checkout" affichée si l'utilisateur n'est pas connecté
+  checkoutModal: "#checkoutModal",
+  checkoutModalLogin: '#checkoutModal a[href="/login"]',
+};
+
+// Page "Checkout" (/checkout)
+export const CheckoutLocators = {
+  deliveryAddress: "#address_delivery",
+  billingAddress: "#address_invoice",
+  reviewOrderRows: "#cart_info tbody tr[id^='product-']",
+  comment: 'textarea[name="message"]',
+  placeOrder: 'a[href="/payment"]',
+};
+
+// Page "Payment" (/payment) et confirmation de commande
+export const PaymentLocators = {
+  nameOnCard: '[data-qa="name-on-card"]',
+  cardNumber: '[data-qa="card-number"]',
+  cvc: '[data-qa="cvc"]',
+  expiryMonth: '[data-qa="expiry-month"]',
+  expiryYear: '[data-qa="expiry-year"]',
+  payButton: '[data-qa="pay-button"]',
+  // message vert affiché SUR la page de paiement dès que le paiement est accepté,
+  // juste avant le passage à la page "Order Placed!"
+  paymentSuccess: '.alert-success:contains("Your order has been placed successfully!")',
+  orderPlaced: '[data-qa="order-placed"]',
+  confirmationMessage: '[data-qa="order-placed"] + p',
+  downloadInvoice: 'a[href^="/download_invoice/"]',
+  continueButton: '[data-qa="continue-button"]',
 };
 
 // Page "Test Cases" (/test_cases)
@@ -56,6 +110,7 @@ export const ProductsLocators = {
   productList: ".features_items",
   productCards: ".features_items .productinfo",
   productNames: ".features_items .productinfo p",
+  addToCartButtons: ".features_items .productinfo a.add-to-cart",
   firstViewProduct: '.features_items .choose a[href^="/product_details/"]',
   searchInput: "#search_product",
   searchButton: "#submit_search",
@@ -76,6 +131,10 @@ export const ProductDetailLocators = {
   availability: '.product-information p:contains("Availability")',
   condition: '.product-information p:contains("Condition")',
   brand: '.product-information p:contains("Brand")',
+  quantity: "#quantity",
+  addToCart: ".product-information button.cart",
+  // requête envoyée au serveur par le bouton "Add to cart" (ex. /add_to_cart/1?quantity=4)
+  addToCartRequest: "**/add_to_cart/**",
   // avis
   reviewTitle: 'a[href="#reviews"]:contains("Write Your Review")',
   reviewName: "#name",

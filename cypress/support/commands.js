@@ -86,12 +86,30 @@ Cypress.Commands.add("login", (email, password) => {
 // API 11 et 12 : https://automationexercise.com/api_list
 // ---------------------------------------------------------------------
 
-// cy.createAccountByApi(user) : crée un compte sans passer par l'interface.
-// "user" contient les champs de l'API : name, email, password, title, birth_date,
-// birth_month, birth_year, firstname, lastname, company, address1, address2,
-// country, zipcode, state, city, mobile_number
-Cypress.Commands.add("createAccountByApi", (user) => {
-  cy.request({ method: "POST", url: "/api/createAccount", form: true, body: user, log: false })
+// cy.createAccountByApi(u) : crée un compte sans passer par l'interface.
+// "u" = utilisateur au format de register-data.json (voir support/testUser.js) ;
+// la commande le convertit au format de l'API.
+Cypress.Commands.add("createAccountByApi", (u) => {
+  const body = {
+    name: u.name,
+    email: u.email,
+    password: u.password,
+    title: u.title,
+    birth_date: u.day,
+    birth_month: u.month,
+    birth_year: u.year,
+    firstname: u.firstName,
+    lastname: u.lastName,
+    company: u.company,
+    address1: u.address,
+    address2: u.address2,
+    country: u.country,
+    zipcode: u.zipcode,
+    state: u.state,
+    city: u.city,
+    mobile_number: u.mobile,
+  };
+  cy.request({ method: "POST", url: "/api/createAccount", form: true, body, log: false })
     .its("body")
     .should("contain", "User created!");
 });

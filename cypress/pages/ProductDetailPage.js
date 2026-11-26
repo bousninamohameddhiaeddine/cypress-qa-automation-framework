@@ -10,6 +10,27 @@ class ProductDetailPage {
     });
   }
 
+  // ----- Panier -----
+
+  // Garde le nom du produit dans l'alias @productName
+  rememberName() {
+    cy.get(L.name).invoke("text").as("productName", { type: "static" });
+  }
+
+  setQuantity(quantity) {
+    cy.get(L.quantity).clear().type(String(quantity));
+    cy.get(L.quantity).should("have.value", String(quantity));
+  }
+
+  // Clique sur "Add to cart" et ATTEND la réponse du serveur.
+  // Sans cette attente, le test pouvait ouvrir le panier avant que l'ajout soit enregistré :
+  // panier vide → QAP-50 passait à tort (alors qu'à la main le bug est visible).
+  addToCart() {
+    cy.intercept("GET", L.addToCartRequest).as("addToCartRequest");
+    cy.get(L.addToCart).click();
+    cy.wait("@addToCartRequest");
+  }
+
   // ----- Avis -----
 
   // row = ligne du JSON (name, email, review)

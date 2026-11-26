@@ -1,6 +1,7 @@
 import { ProductsLocators as L } from "./locators";
 import HomePage from "./HomePage";
 import Header from "./Header";
+import CartModal from "./CartModal";
 
 // Page "All Products" : https://automationexercise.com/products
 // (aussi : résultats de recherche, produits par catégorie et par marque)
@@ -9,6 +10,9 @@ class ProductsPage {
   open() {
     HomePage.visit();
     Header.goToProducts();
+    // On attend d'abord la nouvelle adresse : la page d'accueil a aussi un titre
+    // ".features_items h2.title" ("Features Items") qui pouvait être lu par erreur
+    cy.url().should("include", "/products");
     this.shouldShowTitle("All Products");
   }
 
@@ -24,6 +28,28 @@ class ProductsPage {
   openFirstProduct() {
     cy.get(L.firstViewProduct).first().click();
     cy.url().should("include", "/product_details/");
+  }
+
+  // ----- Panier -----
+
+  // Ajoute le produit n° index (0 = premier) et garde son nom dans l'alias @<alias>
+  // Le bouton apparaît au survol : on clique sur celui de la carte, toujours présent
+  // { type: "static" } : l'alias garde la VALEUR lue ici. Sans cette option, Cypress 12+
+  // refait la recherche quand on lit l'alias… sur la page Panier, où elle ne trouve rien.
+  addToCart(index, alias = `product${index}`) {
+    cy.get(L.productNames).eq(index).invoke("text").as(alias, { type: "static" });
+    cy.get(L.addToCartButtons).eq(index).click();
+  }
+
+  // Ajoute tous les produits affichés (ex. après une recherche) et garde leurs noms dans @names
+  addAllToCart() {
+    cy.get(L.productNames).then(($names) => {
+      cy.wrap($names.toArray().map((el) => el.textContent.trim())).as("names", { type: "static" });
+    });
+    cy.get(L.addToCartButtons).each(($button) => {
+      cy.wrap($button).click();
+      CartModal.continueShopping();
+    });
   }
 
   // ----- Recherche -----

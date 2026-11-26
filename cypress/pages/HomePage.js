@@ -25,6 +25,17 @@ class HomePage {
     cy.scrollTo("top");
   }
 
+  // QAP-30 : ajoute le premier article recommandé visible et garde son nom dans @recommended
+  addFirstRecommendedToCart() {
+    cy.get(L.recommendedTitle).scrollIntoView().should("be.visible");
+    cy.get(L.recommendedActiveCard)
+      .first()
+      .within(() => {
+        cy.get(L.cardName).invoke("text").as("recommended", { type: "static" });
+        cy.get(L.cardAddToCart).click();
+      });
+  }
+
   shouldBeAtTop() {
     cy.get(L.heroTitle).should("be.visible");
     cy.window().its("scrollY").should("be.lessThan", 100);
