@@ -1,0 +1,13 @@
+{
+  "valid": [
+    { "jira": "QAP-17", "case": "Recherche Jeans", "term": "Jeans", "nameMatch": "all" },
+    { "jira": "QAP-17", "case": "Recherche Dress", "term": "Dress", "nameMatch": "some" },
+    { "jira": "QAP-17", "case": "Recherche Top", "term": "Top", "nameMatch": "some" }
+  ],
+  "invalid": [
+    { "jira": "QAP-45", "case": "Produit inexistant", "term": "produitinexistant123" },
+    { "jira": "QAP-46", "case": "Caractères spéciaux", "term": "!@#$%^&*()" },
+    { "jira": "QAP-46", "case": "Balise HTML", "term": "<b>test</b>" },
+    { "jira": "QAP-46", "case": "Injection SQL simple", "term": "' OR '1'='1" }
+  ]
+}

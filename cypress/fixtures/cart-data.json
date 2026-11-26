@@ -1,0 +1,12 @@
+{
+  "quantity": {
+    "jira": "QAP-21",
+    "case": "Ajout d'un produit avec une quantité de 4",
+    "value": 4
+  },
+  "searchTerm": "Jeans",
+  "invalidQuantity": [
+    { "jira": "QAP-50", "case": "Quantité 0", "value": "0" },
+    { "jira": "QAP-50", "case": "Quantité négative", "value": "-1" }
+  ]
+}

@@ -155,3 +155,6 @@ cypress.env.json
 .env
 # Notes personnelles (non publiées)
 docs/discussion-claude-*.md
+
+# Fichiers téléchargés par les tests (facture QAP-32)
+cypress/downloads/

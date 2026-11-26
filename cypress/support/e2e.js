@@ -29,8 +29,16 @@ beforeEach(() => {
 });
 
 afterEach(function () {
-  const { title, state } = this.currentTest;
+  const { title, state, err } = this.currentTest;
   const failed = state === "failed";
+
+  // En cas d'échec : le message d'erreur exact dans un fichier .txt à côté des captures
+  // (la capture ne montre pas toujours la ligne en erreur du journal Cypress)
+  if (failed && err) {
+    const file = `${Cypress.config("screenshotsFolder")}/${screenshotName(title, "FAILED")}.txt`;
+    cy.writeFile(file, `${title}\n\n${err.message}\n`, { log: false });
+  }
+
   if (failed && !Cypress.config("isInteractive")) return; // déjà prise par Cypress
   if (!failed && state !== "passed") return;
   if (!failed && Cypress.validationCaptured) return; // déjà prise dans le test

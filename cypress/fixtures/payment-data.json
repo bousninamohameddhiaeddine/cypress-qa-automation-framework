@@ -1,0 +1,38 @@
+{
+  "emptyField": [
+    { "jira": "QAP-49", "case": "Nom sur la carte vide", "field": "nameOnCard", "value": "" },
+    { "jira": "QAP-49", "case": "Numéro de carte vide", "field": "cardNumber", "value": "" },
+    { "jira": "QAP-49", "case": "CVC vide", "field": "cvc", "value": "" },
+    { "jira": "QAP-49", "case": "Mois d'expiration vide", "field": "expiryMonth", "value": "" },
+    { "jira": "QAP-49", "case": "Année d'expiration vide", "field": "expiryYear", "value": "" }
+  ],
+  "invalidFormat": [
+    { "jira": "QAP-84", "case": "Nom - lettres et chiffres", "field": "nameOnCard", "value": "QA Test 123" },
+    { "jira": "QAP-84", "case": "Nom - chiffres uniquement", "field": "nameOnCard", "value": "12345" },
+    { "jira": "QAP-84", "case": "Nom - caractères spéciaux", "field": "nameOnCard", "value": "QA@Test!" },
+    { "jira": "QAP-84", "case": "Nom - espaces uniquement", "field": "nameOnCard", "value": "   " },
+
+    { "jira": "QAP-84", "case": "Carte - lettres", "field": "cardNumber", "value": "abcdabcdabcdabcd" },
+    { "jira": "QAP-84", "case": "Carte - 15 chiffres", "field": "cardNumber", "value": "411111111111111" },
+    { "jira": "QAP-84", "case": "Carte - 17 chiffres", "field": "cardNumber", "value": "41111111111111111" },
+    { "jira": "QAP-84", "case": "Carte - avec espaces", "field": "cardNumber", "value": "4111 1111 1111 1111" },
+    { "jira": "QAP-84", "case": "Carte - avec tirets", "field": "cardNumber", "value": "4111-1111-1111-1111" },
+    { "jira": "QAP-84", "case": "Carte - caractères spéciaux", "field": "cardNumber", "value": "4111@111#111$111" },
+
+    { "jira": "QAP-84", "case": "CVC - 2 chiffres", "field": "cvc", "value": "12" },
+    { "jira": "QAP-84", "case": "CVC - 4 chiffres", "field": "cvc", "value": "1234" },
+    { "jira": "QAP-84", "case": "CVC - lettres", "field": "cvc", "value": "abc" },
+    { "jira": "QAP-84", "case": "CVC - chiffres et lettre", "field": "cvc", "value": "1a3" },
+
+    { "jira": "QAP-84", "case": "Mois - 1 chiffre", "field": "expiryMonth", "value": "1" },
+    { "jira": "QAP-84", "case": "Mois - 3 chiffres", "field": "expiryMonth", "value": "123" },
+    { "jira": "QAP-84", "case": "Mois - lettres", "field": "expiryMonth", "value": "ab" },
+    { "jira": "QAP-84", "case": "Mois - 00", "field": "expiryMonth", "value": "00" },
+    { "jira": "QAP-84", "case": "Mois - 13", "field": "expiryMonth", "value": "13" },
+
+    { "jira": "QAP-84", "case": "Année - 2 chiffres", "field": "expiryYear", "value": "30" },
+    { "jira": "QAP-84", "case": "Année - 5 chiffres", "field": "expiryYear", "value": "20300" },
+    { "jira": "QAP-84", "case": "Année - lettres", "field": "expiryYear", "value": "abcd" },
+    { "jira": "QAP-84", "case": "Année - passée (carte expirée)", "field": "expiryYear", "value": "2020" }
+  ]
+}

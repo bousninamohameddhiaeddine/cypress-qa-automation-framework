@@ -1,0 +1,17 @@
+{
+  "valid": [
+    {
+      "jira": "QAP-29",
+      "case": "Ajout d'un avis sur un produit",
+      "name": "QA Test",
+      "email": "qa.avis@test.com",
+      "review": "Très bon produit, avis écrit par un test automatisé.",
+      "success": "Thank you for your review."
+    }
+  ],
+  "invalid": [
+    { "jira": "QAP-48", "case": "Nom vide", "name": "", "email": "qa.avis@test.com", "review": "Avis de test", "validation": "reviewName" },
+    { "jira": "QAP-48", "case": "Courriel vide", "name": "QA Test", "email": "", "review": "Avis de test", "validation": "reviewEmail" },
+    { "jira": "QAP-48", "case": "Avis vide", "name": "QA Test", "email": "qa.avis@test.com", "review": "", "validation": "reviewText" }
+  ]
+}

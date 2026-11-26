@@ -1,10 +1,44 @@
+import { HomeLocators as L } from "./locators";
 import Header from "./Header";
+import Footer from "./Footer";
 
 // Page d'accueil : https://automationexercise.com/
 class HomePage {
   visit() {
     cy.visit("/");
     Header.shouldShowLogo();
+  }
+
+  // Descend en bas de la page et vérifie que le pied de page est visible
+  scrollToFooter() {
+    cy.scrollTo("bottom");
+    Footer.shouldShowSubscription();
+  }
+
+  // QAP-33 : remonte avec le bouton flèche
+  scrollUpWithArrow() {
+    cy.get(L.scrollUpButton).should("be.visible").click();
+  }
+
+  // QAP-34 : remonte sans le bouton flèche
+  scrollUpWithoutArrow() {
+    cy.scrollTo("top");
+  }
+
+  // QAP-30 : ajoute le premier article recommandé visible et garde son nom dans @recommended
+  addFirstRecommendedToCart() {
+    cy.get(L.recommendedTitle).scrollIntoView().should("be.visible");
+    cy.get(L.recommendedActiveCard)
+      .first()
+      .within(() => {
+        cy.get(L.cardName).invoke("text").as("recommended", { type: "static" });
+        cy.get(L.cardAddToCart).click();
+      });
+  }
+
+  shouldBeAtTop() {
+    cy.get(L.heroTitle).should("be.visible");
+    cy.window().its("scrollY").should("be.lessThan", 100);
   }
 }
 
