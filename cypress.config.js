@@ -19,6 +19,10 @@ module.exports = defineConfig({
       // @cypress/grep : avec grepFilterSpecs, seuls les fichiers qui contiennent
       // le tag demandé sont ouverts (exécution smoke plus rapide)
       cypressGrepPlugin(config);
+
+      // En "cypress run" seulement : ne pas garder l'historique des commandes des
+      // anciens tests (économise la mémoire). Dans "cypress open", on le garde pour déboguer.
+      if (!config.isInteractive) config.numTestsKeptInMemory = 0;
       return config;
     },
     viewportWidth: 1366,
@@ -28,6 +32,10 @@ module.exports = defineConfig({
     // les tests quand le site est rapide.
     defaultCommandTimeout: 15000,
     retries: { runMode: 2, openMode: 0 },
+    // payment.cy.js enchaîne ~28 tests lourds (connexion + panier + paiement, jusqu'à
+    // 3 tentatives chacun) : Chrome manquait de mémoire et l'exécution se figeait.
+    // Cypress libère la mémoire du navigateur entre les tests.
+    experimentalMemoryManagement: true,
     video: false,
     // capture automatique en cas d'échec (écran complet + erreur)
     screenshotOnRunFailure: true,
