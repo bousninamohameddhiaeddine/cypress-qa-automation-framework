@@ -24,6 +24,6 @@
   "homepage": "https://github.com/bousninamohameddhiaeddine/cypress-qa-automation-framework#readme",
   "devDependencies": {
     "@cypress/grep": "^7.0.0",
-    "cypress": "^16.2.1"
+    "cypress": "^16.4.0"
   }
 }
